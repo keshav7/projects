@@ -42,4 +42,7 @@ public class AirlineManagerServiceImpl implements AirlineManagerService{
         }
         return clientResponse;
     }
+
+    public static class ReservationManagerServiceImpl {
+    }
 }

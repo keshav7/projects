@@ -2,6 +2,7 @@ package com.projects.airline.server.core.service.impl;
 
 import com.projects.airline.server.core.domain.Flight;
 import com.projects.airline.server.core.domain.FlightSeat;
+import com.projects.airline.server.core.domain.Location;
 import com.projects.airline.server.core.domain.SeatFare;
 import com.projects.airline.server.core.enums.Errors;
 import com.projects.airline.server.core.enums.SeatStatus;
@@ -27,6 +28,15 @@ public class FlightSeatServiceImpl implements FlightSeatService {
     public Iterable<FlightSeat> save(CreatSeatRequest seatRequest, Flight flight, SeatFare fare) throws AirlineException {
         try {
             return flightSeatRepository.save(setDomainAttributes(seatRequest, flight, fare));
+        } catch (Exception e) {
+            throw new AirlineException(Errors.LMS_INTERNAL_ERROR, e);
+        }
+    }
+
+    @Override
+    public FlightSeat findById(Long seatId) throws AirlineException{
+        try {
+            return flightSeatRepository.findOne(seatId);
         } catch (Exception e) {
             throw new AirlineException(Errors.LMS_INTERNAL_ERROR, e);
         }
