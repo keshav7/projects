@@ -1,0 +1,26 @@
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+
+bootRepackage.enabled = true
+
+bootRun {
+    addResources = false
+    jvmArgs = ["-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5020"]
+}
+
+mainClassName = 'com.projects.core.Application'
+
+jar {
+    manifest.attributes("Main-Class": mainClassName)
+    baseName = 'com-project-tracker'
+    version = '1.0-SNAPSHOT'
+}
+
+dependencies {
+    compile project(':tracker:tracker-server:tracker-core')
+}
