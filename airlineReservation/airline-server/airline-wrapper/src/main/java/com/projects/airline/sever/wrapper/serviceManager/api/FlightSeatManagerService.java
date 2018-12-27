@@ -10,4 +10,6 @@ import java.util.List;
 public interface FlightSeatManagerService {
     ClientResponse createFlightSeats(List<CreatSeatRequest> creatSeatsRequest, String requestedBy,
                                      String requestId) throws AirlineException;
+
+
 }

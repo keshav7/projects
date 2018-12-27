@@ -5,6 +5,7 @@ import com.projects.airline.server.core.domain.SeatFare;
 import com.projects.airline.server.core.enums.Errors;
 import com.projects.airline.server.core.exception.AirlineException;
 import com.projects.airline.server.core.request.CreatSeatRequest;
+import com.projects.airline.server.core.request.CreateFlightRequest;
 import com.projects.airline.server.core.service.api.FlightSeatService;
 import com.projects.airline.server.core.service.api.FlightService;
 import com.projects.airline.server.core.service.api.SeatFareService;
@@ -50,5 +51,7 @@ public class FlightSeatManagerServiceImpl implements FlightSeatManagerService {
             throw new AirlineException(Errors.LMS_INTERNAL_ERROR, e);
         }
     }
+
+
 
 }

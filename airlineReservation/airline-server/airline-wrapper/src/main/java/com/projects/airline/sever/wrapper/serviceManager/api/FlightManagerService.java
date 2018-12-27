@@ -10,4 +10,7 @@ public interface FlightManagerService {
     ClientResponse createFlight(CreateFlightRequest createFlightRequest, String requestedBy,
                                 String requestId) throws AirlineException;
 
+    ClientResponse searchFlights(CreateFlightRequest request, String requestedBy,
+                                 String requestId) throws AirlineException;
+
 }

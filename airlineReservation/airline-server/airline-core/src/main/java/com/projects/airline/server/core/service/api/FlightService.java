@@ -7,6 +7,8 @@ import com.projects.airline.server.core.domain.Location;
 import com.projects.airline.server.core.exception.AirlineException;
 import com.projects.airline.server.core.request.CreateFlightRequest;
 
+import java.util.List;
+
 public interface FlightService {
 
     Flight saveFlight(CreateFlightRequest flightRequest,
@@ -16,4 +18,5 @@ public interface FlightService {
                       Location destLocation,
                       String requestedBy) throws AirlineException;
     Flight findById(Long flightId) throws AirlineException;
+    List<Flight> search(CreateFlightRequest request) throws AirlineException;
 }

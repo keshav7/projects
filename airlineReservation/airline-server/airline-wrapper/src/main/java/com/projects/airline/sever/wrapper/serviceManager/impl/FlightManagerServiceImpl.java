@@ -20,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -55,5 +56,21 @@ public class FlightManagerServiceImpl implements FlightManagerService{
             throw new AirlineException(Errors.LMS_INTERNAL_ERROR, e);
         }
 
+    }
+
+    @Override
+    public ClientResponse searchFlights(CreateFlightRequest request, String requestedBy, String requestId) throws AirlineException {
+        try {
+            ClientResponse clientResponse = null;
+            List<Flight> flights = flightService.search(request);
+            Map<String, Object> responseData = new HashMap();
+            clientResponse = new ClientResponse(SuccessCodes.CREATED, HttpStatus.CREATED, responseData);
+            clientResponse.setData(flights);
+            return clientResponse;
+        } catch(AirlineException e) {
+            throw e;
+        } catch(Exception e) {
+            throw new AirlineException(Errors.LMS_INTERNAL_ERROR, e);
+        }
     }
 }

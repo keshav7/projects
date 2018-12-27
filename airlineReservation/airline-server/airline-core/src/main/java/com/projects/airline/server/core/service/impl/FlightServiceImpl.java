@@ -8,6 +8,7 @@ import com.projects.airline.server.core.enums.Errors;
 import com.projects.airline.server.core.enums.FlightStatus;
 import com.projects.airline.server.core.exception.AirlineException;
 import com.projects.airline.server.core.repository.FlightRepository;
+import com.projects.airline.server.core.repository.FlightRepositoryCustom;
 import com.projects.airline.server.core.request.CreateFlightRequest;
 import com.projects.airline.server.core.service.api.FlightService;
 import com.projects.airline.server.core.utils.DateTimeFormatUtils;
@@ -16,12 +17,16 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Slf4j
 @Component
 public class FlightServiceImpl implements FlightService {
 
     @Autowired
     FlightRepository flightRepository;
+    @Autowired
+    FlightRepositoryCustom flightRepositoryCustom;
 
     @Override
     public Flight saveFlight(CreateFlightRequest flightRequest, AirlineCompany airlineCompany,
@@ -46,6 +51,15 @@ public class FlightServiceImpl implements FlightService {
     public Flight findById(Long flightId) throws AirlineException{
         try {
             return flightRepository.findOne(flightId);
+        } catch(Exception e) {
+            throw new AirlineException(Errors.LMS_INTERNAL_ERROR, e);
+        }
+    }
+
+    @Override
+    public List<Flight> search(CreateFlightRequest request) throws AirlineException {
+        try {
+            return flightRepositoryCustom.search(request);
         } catch(Exception e) {
             throw new AirlineException(Errors.LMS_INTERNAL_ERROR, e);
         }
