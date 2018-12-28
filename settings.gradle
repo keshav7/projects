@@ -11,4 +11,8 @@ include 'airlineReservation'
 include 'airlineReservation:airline-server'
 include 'airlineReservation:airline-server:airline-core'
 include 'airlineReservation:airline-server:airline-wrapper'
+include 'foodCourt'
+include 'foodCourt:server'
+include 'foodCourt:server:fc-wrapper'
+include 'foodCourt:server:fc-core'
 
