@@ -1,5 +1,6 @@
 package repository;
 
+import domain.MenuItem;
 import org.springframework.data.repository.CrudRepository;
 
 import java.awt.*;
