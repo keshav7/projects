@@ -8,7 +8,7 @@
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <charset>utf-8</charset>
-            <Pattern>%boldYellow([%d]) %blue([%thread]) %highlight(%-5level) %green([request-id=%X{request-id}]) %blue([%class{0}.%method:%L]) %msg%n</Pattern>
+            <Pattern>%boldYellow([%d]) %blue([%thread]) %highlight(%-5level) %green([com.projects.fc.server.core.request-id=%X{com.projects.fc.server.core.request-id}]) %blue([%class{0}.%method:%L]) %msg%n</Pattern>
         </encoder>
     </appender>
 
@@ -26,7 +26,7 @@
         </rollingPolicy>
         <encoder>
             <charset>utf-8</charset>
-            <Pattern>%boldYellow([%d]) %blue([%thread]) %highlight(%-5level) %green([request-id=%X{request-id}]) %blue([%class{0}.%method:%L]) %msg%n</Pattern>
+            <Pattern>%boldYellow([%d]) %blue([%thread]) %highlight(%-5level) %green([com.projects.fc.server.core.request-id=%X{com.projects.fc.server.core.request-id}]) %blue([%class{0}.%method:%L]) %msg%n</Pattern>
         </encoder>
     </appender>
 

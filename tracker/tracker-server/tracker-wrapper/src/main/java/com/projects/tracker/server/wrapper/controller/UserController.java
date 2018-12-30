@@ -33,7 +33,7 @@ public class UserController {
     @Metered(name = "create new user", absolute = true)
     @LogExecutionTime
     public @ResponseBody
-    ResponseEntity AddUser(@RequestBody @ApiParam(value = "create user request", required = true)
+    ResponseEntity AddUser(@RequestBody @ApiParam(value = "create user com.projects.fc.server.core.request", required = true)
                            @Valid CreateUserRequest createUserRequest) {
         ClientResponse clientResponse = null;
         try {

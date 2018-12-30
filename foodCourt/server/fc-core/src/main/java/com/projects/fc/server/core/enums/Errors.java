@@ -1,4 +1,4 @@
-package com.projects.tracker.server.core.enums;
+package com.projects.fc.server.core.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +18,7 @@ public enum Errors implements com.projects.core.datatypes.enumInterfaces.Errors 
     LMS_INVALID_STATE_TRANSITION("INVALID_STATE_TRANSITION", 1405, HttpStatus.FORBIDDEN, "Invalid state transition."),
     LMS_TR_LINE_ITEM_NOT_IN_CREATED_STATE("TR_LINE_ITEM_NOT_IN_CREATED_STATE", 1406, HttpStatus.FORBIDDEN, "TR line item is not in created state."),
     LMS_CONSIGNMENT_NOT_FOUND("CONSIGNMENT_NOT_FOUND", 1407, HttpStatus.BAD_REQUEST, "Consignment not found"),
-    LMS_CONTAINER_SERVICE_EXCEPTION("CONTAINER_SERVICE_EXCEPTION", 1408, HttpStatus.BAD_REQUEST, "Error in container serviceManager."),
+    LMS_CONTAINER_SERVICE_EXCEPTION("CONTAINER_SERVICE_EXCEPTION", 1408, HttpStatus.BAD_REQUEST, "Error in container com.projects.fc.server.core.service."),
     LMS_INVALID_DIMENSION_UNIT("INVALID_DIMENSION_UNIT", 1409, HttpStatus.BAD_REQUEST, "Not a valid dimension unit."),
     LMS_INVALID_CURRENCY_UNIT("INVALID_CURRENCY_UNIT", 1410, HttpStatus.BAD_REQUEST, "Not a valid currency unit."),
     LMS_PASS_STATUS_AND_TR_LINE_ITEM_IDS("EITHER_PASS_STATUS_OR_TR_LINE_ITEM_IDS", 1411, HttpStatus.BAD_REQUEST, "Either pass consignment status and tr line item ids."),
@@ -35,8 +35,8 @@ public enum Errors implements com.projects.core.datatypes.enumInterfaces.Errors 
     LMS_OPERATION_NOT_ALLOWED_AT_LOCATION("OPERATION_NOT_ALLOWED_AT_CURRENT_LOCATION", 1422, HttpStatus.BAD_REQUEST, "Operation not allowed at current location"),
     LMS_PAGE_SIZE_ERROR("LMS_PAGE_SIZE_ERROR", 1423, HttpStatus.BAD_REQUEST, "Page size is larger"),
     LMS_DATE_PARSE_ERROR("LMS_DATE_PARSE_ERROR", 1424, HttpStatus.BAD_REQUEST, "Date is not in correct format"),
-    LMS_REQUEST_MANAGER_SERVICE_EXCEPTION("LOAD_MANAGER_SERVICE_EXCEPTION", 1425, HttpStatus.BAD_REQUEST, "Error in com.projects.fc.server.core.request manager serviceManager"),
-    GROUP_ID_NOT_FOUND("GROUP_ID_NOT_FOUND_IN_REQUEST_MANAGER", 1426, HttpStatus.BAD_REQUEST, "Group ID not found in Request Manager serviceManager"),
+    LMS_REQUEST_MANAGER_SERVICE_EXCEPTION("LOAD_MANAGER_SERVICE_EXCEPTION", 1425, HttpStatus.BAD_REQUEST, "Error in com.projects.fc.server.core.request manager com.projects.fc.server.core.service"),
+    GROUP_ID_NOT_FOUND("GROUP_ID_NOT_FOUND_IN_REQUEST_MANAGER", 1426, HttpStatus.BAD_REQUEST, "Group ID not found in Request Manager com.projects.fc.server.core.service"),
     LMS_LOAD_UNIT_EXPECTED_AT_OTHER_LOCATION("OPERATION_NOT_ALLOWED_AT_CURRENT_LOCATION", 1427, HttpStatus.BAD_REQUEST, "Load Unit needs to be delivered at different location"),
     LMS_LOAD_UNIT_EXPECTATION_NOT_FOUND_INCORRECT_LOCATION("EXPECTATION_NOT_FOUND_INCORRECT_LOCATION", 1428, HttpStatus.BAD_REQUEST, "Load Unit needs to be delivered at different location"),
     LMS_LOAD_UNIT_LOCATION_INCORRECT("LOAD_UNIT_NOT_EXPECTED_AT_LOCATION", 1431, HttpStatus.BAD_REQUEST, "Load unit location is incorret"),
@@ -47,19 +47,19 @@ public enum Errors implements com.projects.core.datatypes.enumInterfaces.Errors 
     LMS_CONNECTION_MANAGER_EXCEPTION("LMS_CONNECTION_MANAGER_EXCEPTION", 1433 , HttpStatus.INTERNAL_SERVER_ERROR, "Error while calling connection manager"),
     LMS_UNSUPPORTED_TIER_TYPE("LMS_UNSUPPORTED_TIER_TYPE", 1434, HttpStatus.BAD_REQUEST, "Unsupported trier type"),
     LMS_PARSING_TO_DTO_FAILED("LMS_PARSING_TO_DTO_FAILED", 1435 , HttpStatus.INTERNAL_SERVER_ERROR , "Parsing to dto failed"),
-    LMS_FAILED_TO_GET_SERVICE_REQUEST_DETAIL("LMS_FAILED_TO_GET_SERVICE_REQUEST", 1436 , HttpStatus.INTERNAL_SERVER_ERROR , "Failed to get serviceManager com.projects.fc.server.core.request detail"),
+    LMS_FAILED_TO_GET_SERVICE_REQUEST_DETAIL("LMS_FAILED_TO_GET_SERVICE_REQUEST", 1436 , HttpStatus.INTERNAL_SERVER_ERROR , "Failed to get com.projects.fc.server.core.service com.projects.fc.server.core.request detail"),
     LMS_FAILED_TO_GET_RESORT_MATRIX_DETAIL("LMS_FAILED_TO_GET_RESORT_MATRIX_DETAIL", 1437 , HttpStatus.INTERNAL_SERVER_ERROR , "Failed to get resort matrix detail"),
     LMS_RESORT_LANE_ZONE_ERROR("LMS_RESORT_LANE_ZONE_ERROR", 1438, HttpStatus.INTERNAL_SERVER_ERROR, "Resort lane zone com.projects.fc.server.core.repository error"),
-    LMS_LOCATION_SERVICE_ERROR("LMS_LOCATION_SERVICE_ERROR", 1439, HttpStatus.INTERNAL_SERVER_ERROR, "Location serviceManager error"),
+    LMS_LOCATION_SERVICE_ERROR("LMS_LOCATION_SERVICE_ERROR", 1439, HttpStatus.INTERNAL_SERVER_ERROR, "Location com.projects.fc.server.core.service error"),
     LMS_LOCATION_NOT_FOUND("LMS_LOCATION_NOT_FOUND", 1440, HttpStatus.BAD_REQUEST, "No location found"),
-    REQUEST_MANAGER_SERVICE_ISSUE("REQUEST_MANAGER_SERVICE_ISSUE", 1441, HttpStatus.INTERNAL_SERVER_ERROR, "Request manager serviceManager Issue"),
+    REQUEST_MANAGER_SERVICE_ISSUE("REQUEST_MANAGER_SERVICE_ISSUE", 1441, HttpStatus.INTERNAL_SERVER_ERROR, "Request manager com.projects.fc.server.core.service Issue"),
     LMS_LOAD_UNIT_DOES_NOT_EXIST_IN_TRANSPORT("LMS_LOAD_UNIT_DOES_NOT_EXIST_IN_TRANSPORT", 1442, HttpStatus.BAD_REQUEST, "Load unit does not exist in transport system"),
     LMS_LOAD_UNIT_PRESENT_IN_PICKED_STATE("LMS_LOAD_UNIT_PRESENT_IN_PICKED_STATE", 1443, HttpStatus.BAD_REQUEST, "Load unit already exist in picked state"),
     LMS_LOAD_UNIT_PRESENT_IN_LOST_STATE("LMS_LOAD_UNIT_PRESENT_IN_LOST_STATE", 1444, HttpStatus.BAD_REQUEST, "Load unit already exist in lost state"),
     LMS_LOAD_UNIT_EXPECTATION_FOUND_CORRECT_LOCATION("LMS_LOAD_UNIT_EXPECTATION_FOUND_CORRECT_LOCATION", 1445, HttpStatus.BAD_REQUEST, "Load Unit expectation created and can be delivered at current location"),
     LMS_NO_RESORT_ZONE_FOUND("LMS_NO_RESORT_ZONE_FOUND", 1446, HttpStatus.BAD_REQUEST, "No resort zone found for given trackingId and locationId"),
     LMS_MISMATCH_IN_SR_TRACKING_ID_AND_ERP_CONSIGNMENT_TRACKING_IDS("LMS_MISMATCH_IN_SR_TRACKING_ID_AND_ERP_CONSIGNMENT_TRACKING_IDS",
-            1447, HttpStatus.BAD_REQUEST, "There is mismatch in erp consignment shipment tracking ids and serviceManager com.projects.fc.server.core.request tracking ids"),
+            1447, HttpStatus.BAD_REQUEST, "There is mismatch in erp consignment shipment tracking ids and com.projects.fc.server.core.service com.projects.fc.server.core.request tracking ids"),
     LMS_INVALID_LOADING_SESSION("LMS_INVALID_LOADING_SESSION",
             1448, HttpStatus.FORBIDDEN, "Loading is either already completed or has not started yet, cannot perform loading activities now."),
     LMS_MISSING_PICK_UP_PROOF_INFO("LMS_MISSING_PICK_UP_PROOF_INFO",
@@ -71,7 +71,8 @@ public enum Errors implements com.projects.core.datatypes.enumInterfaces.Errors 
     LMS_CONSIGNMENT_CLOSURE_CHECKS_FAILED("LMS_CONSIGNMENT_CLOSURE_CHECKS_FAILED", 1450, HttpStatus.BAD_REQUEST, "Some checks for consignment closure has failed."),
     LMS_INVALID_REASON_FOR_DG_OFFLOAD("LMS_INVALID_REASON_FOR_DG_OFFLOAD", 1451, HttpStatus.BAD_REQUEST, "Invalid reason for DG Offload."),
     LMS_INVALID_CONSIGNMENT_STATE("LMS_INVALID_CONSIGNMENT_STATE", 1452, HttpStatus.FORBIDDEN, "Invalid consignment state."),
-    LMS_SEARCH_FIELD_ERROR("LMS_SEARCH_FIELD_ERROR", 1453, HttpStatus.BAD_REQUEST, "At least one search parameter should be present for load search");
+    LMS_SEARCH_FIELD_ERROR("LMS_SEARCH_FIELD_ERROR", 1453, HttpStatus.BAD_REQUEST, "At least one search parameter should be present for load search"),
+    LMS_TRIP_SERVICE_ERROR("LMS_TRIP_SERVICE_ERROR", 1454, HttpStatus.INTERNAL_SERVER_ERROR, "Trip Service error");
 
     @Getter
     private String code;

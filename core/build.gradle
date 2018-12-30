@@ -16,7 +16,7 @@ repositories {
     mavenCentral()
     maven { url 'http://repo.spring.io/milestone' }
     maven { url 'http://repo.spring.io/snapshot' }
-    maven { url 'https://repository.jboss.org/nexus/content/repositories/releases' }
+    maven { url 'https://com.projects.fc.server.core.repository.jboss.org/nexus/content/repositories/releases' }
     maven { url 'http://repo.maven.apache.org/maven2' }
 }
 
