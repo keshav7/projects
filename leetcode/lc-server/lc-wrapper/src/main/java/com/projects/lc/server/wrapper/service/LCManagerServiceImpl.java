@@ -20,18 +20,26 @@ public class LCManagerServiceImpl implements LCManagerService {
         char[] characters = inputStr.toCharArray();
         HashMap<Character, Integer> hash= new HashMap<>();
         Integer start = 0;
+        Integer startA = 0;
         Integer end = 0;
+        Integer endA = 0;
+        Integer len = 0;
         for(int i = 0;i < characters.length;i++) {
             if(!hash.containsKey(characters[i])) {
                 hash.put(characters[i], i);
             }
             else {
+                if((end - start + 1) > len) {
+                    len = end - start + 1;
+                    startA = start;
+                    endA = end;
+                }
                 start = hash.get(characters[i]) + 1;
             }
             end = i;
         }
         Map<String, Object> responseData = new HashMap();
-        responseData.put("answer", inputStr.substring(start, end));
+        responseData.put("answer", inputStr.substring(startA, endA + 1));
         clientResponse = new ClientResponse(SuccessCodes.CREATED, HttpStatus.CREATED, responseData);
         return clientResponse;
     }
