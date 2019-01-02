@@ -15,4 +15,8 @@ include 'foodCourt'
 include 'foodCourt:server'
 include 'foodCourt:server:fc-wrapper'
 include 'foodCourt:server:fc-core'
+include 'leetcode'
+include 'leetcode:lc-server'
+include 'leetcode:lc-server:lc-wrapper'
+findProject(':leetcode:lc-server:lc-wrapper')?.name = 'lc-wrapper'
 
