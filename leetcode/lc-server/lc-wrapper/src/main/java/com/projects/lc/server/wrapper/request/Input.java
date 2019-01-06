@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LongestSubstringWithoutRepeatCharatersRequest {
+public class Input {
 
     @NotNull
     String input;
