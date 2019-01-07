@@ -67,4 +67,43 @@ public class LCController {
     }
 
 
+    @RequestMapping(value = "three_sum", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Metered(name = "three sum", absolute = true)
+    @LogExecutionTime
+    public @ResponseBody
+    ResponseEntity threeSum(
+            @RequestBody @ApiParam(value = "three sum", required = true)
+            @Valid Input request) {
+        ClientResponse clientResponse = null;
+        try {
+            clientResponse = lcManagerService.threeSum(request.getInputIntList());
+        } catch (LCException e) {
+            log.error("Exception in finding longest palindrome substring", e);
+            clientResponse = ResourceUtils.setClientErrorResponse(e);
+        }
+        return new ResponseEntity<>(clientResponse, clientResponse.getHttpStatus());
+    }
+
+    @RequestMapping(value = "valid_parenthesis", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Metered(name = "validate parenthesis", absolute = true)
+    @LogExecutionTime
+    public @ResponseBody
+    ResponseEntity validateParenthesis(
+            @RequestBody @ApiParam(value = "valid parenthesis", required = true)
+            @Valid Input request) {
+        ClientResponse clientResponse = null;
+        try {
+            clientResponse = lcManagerService.validParenthesis(request.getInput());
+        } catch (LCException e) {
+            log.error("Exception in finding longest palindrome substring", e);
+            clientResponse = ResourceUtils.setClientErrorResponse(e);
+        }
+        return new ResponseEntity<>(clientResponse, clientResponse.getHttpStatus());
+    }
+
+
 }
