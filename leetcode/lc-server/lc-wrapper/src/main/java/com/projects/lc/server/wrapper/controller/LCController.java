@@ -105,5 +105,44 @@ public class LCController {
         return new ResponseEntity<>(clientResponse, clientResponse.getHttpStatus());
     }
 
+    @RequestMapping(value = "remove_duplicates_sorted_list", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Metered(name = "remove duplicates sorted list", absolute = true)
+    @LogExecutionTime
+    public @ResponseBody
+    ResponseEntity removeDuplicatesSortedList(
+            @RequestBody @ApiParam(value = "remove duplicates sorted list", required = true)
+            @Valid Input request) {
+        ClientResponse clientResponse = null;
+        try {
+            clientResponse = lcManagerService.removeDuplicates(request.getInputIntList());
+        } catch (LCException e) {
+            log.error("Exception in finding longest palindrome substring", e);
+            clientResponse = ResourceUtils.setClientErrorResponse(e);
+        }
+        return new ResponseEntity<>(clientResponse, clientResponse.getHttpStatus());
+    }
+
+    @RequestMapping(value = "next_permute", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Metered(name = "next permute", absolute = true)
+    @LogExecutionTime
+    public @ResponseBody
+    ResponseEntity nextPermute(
+            @RequestBody @ApiParam(value = "next permute", required = true)
+            @Valid Input request) {
+        ClientResponse clientResponse = null;
+        try {
+            clientResponse = lcManagerService.nextPermute(request.getInputIntList());
+        } catch (LCException e) {
+            log.error("Exception in finding longest palindrome substring", e);
+            clientResponse = ResourceUtils.setClientErrorResponse(e);
+        }
+        return new ResponseEntity<>(clientResponse, clientResponse.getHttpStatus());
+    }
+
+
 
 }

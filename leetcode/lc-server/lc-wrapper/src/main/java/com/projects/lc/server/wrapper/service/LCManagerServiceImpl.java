@@ -194,4 +194,188 @@ public class LCManagerServiceImpl implements LCManagerService {
         }
         return retChar;
     }
+
+    @Override
+    public ClientResponse removeDuplicates(int[] nums) throws LCException{
+        List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
+        Map<String, Object> responseData = new HashMap();
+        responseData.put("input", nums);
+        if(list.size() == 0) {
+            responseData.put("output", 0);
+            return new ClientResponse(SuccessCodes.OK, HttpStatus.OK, responseData);
+        }
+        if(list.size() == 1) {
+            responseData.put("output", 1);
+            return new ClientResponse(SuccessCodes.OK, HttpStatus.OK, responseData);
+        }
+
+        int len = 1;
+        int temp;
+        int start = 1;
+        int currentVal = list.get(0);
+        while(start < list.size()) {
+            if(list.get(start) != currentVal) {
+                temp = list.get(len);
+                list.set(len, list.get(start));
+                list.set(start, temp);
+                currentVal = list.get(len);
+                len++;
+            }
+            start++;
+        }
+
+        responseData.put("output", len);
+        return new ClientResponse(SuccessCodes.OK, HttpStatus.OK, responseData);
+    }
+
+
+
+
+
+
+    @Override
+    public ClientResponse nextPermute(int[] num) {
+        Map<String, Object> responseData = new HashMap();
+        responseData.put("input", num);
+        Boolean found = false;
+        for(int i = num.length - 2; i >= 0; i--) {
+            for(int j = num.length -1;j > i;j--) {
+                if(num[j] > num[i]) {
+                    swap(num, i , j);
+                    Arrays.sort(num, i+1, num.length);
+                    found = true;
+                }
+                if(found) {
+                    break;
+                }
+            }
+            if(found) {
+                break;
+            }
+        }
+        if(!found) {
+            Arrays.sort(num, 0, num.length);
+        }
+        responseData.put("output", num);
+        return new ClientResponse(SuccessCodes.OK, HttpStatus.OK, responseData);
+    }
+
+
+    private void swap(int[] arr, int firstIndex, int secondIndex) {
+        int temp = arr[firstIndex];
+        arr[firstIndex] = arr[secondIndex];
+        arr[secondIndex] = temp;
+
+    }
+
+//    public List<String> subStringConcatWords(String str, List<String> words) {
+//        int i, j;
+//        HashMap<Integer, List<Integer>> mapWords = new HashMap<>();
+//        for(j = 0;j < mapWords.size();j++) {
+//            List<Integer> indices = new ArrayList<>();
+//            String word = words.get(j);
+//            for (i = 0; i < str.length(); i++) {
+//                if(str.indexOf(word, i) != -1) {
+//                    indices.add(str.indexOf(word, i));
+//                }
+//            }
+//            mapWords.put(j, indices);
+//        }
+//
+//
+//        for(i = 0; i < words.size(); i++) {
+//           List<Integer> map = mapWords.get(j);
+//           Map<Integer, Boolean> travMap = new HashMap<>();
+//           travMap.put(i, true);
+//           for(Integer ind : map) {
+//               Integer len = words.get(ind).length();
+//               Integer size = ind + len;
+//               for(int k = 0; k < words.size(); k ++) {
+//                   if(travMap.containsKey(k) && !travMap.get(k)) {
+//                       List<Integer> vals = mapWords.get(k);
+//                       if(vals.contains(size)) {
+//
+//                       }
+//                   }
+//               }
+//           }
+//
+//         }
+//
+//    }
+//
+//
+//    private void fetchResultSubStr(HashMap<Integer, Integer> memo, HashMap<Integer, Boolean> foundMap, Integer count, Integer reqd, List<Integer> indices) {
+//
+//        if(memo.containsKey(reqd) && !foundMap.get(memo.get(reqd))) {
+//            count++;
+//            indices.add(reqd);
+//            memo.put()
+//            fetchResultSubStr(memo, );
+//        }
+//
+//    }
+
+
+
+
+
+
+
+    private ListNode reverseK(ListNode start, int k) {
+
+        int totalCount = getTotalCount(start);
+        ListNode first = start;
+        ListNode last = null;
+        ListNode ptr = start;
+        int i = 0;
+        while (i < totalCount/k) {
+
+            last = reverse(ptr, k);
+            if(first == start) {
+                start = last;
+            }
+            ptr = ptr.next;
+            i = i + k;
+        }
+        return start;
+    }
+
+    private int getTotalCount(ListNode start) {
+        ListNode ptr = start;
+        int count = 0;
+        while (ptr.next != null) {
+            count++;
+        }
+        return count;
+    }
+
+    private ListNode reverse(ListNode start, int k) {
+        ListNode ln1 = start;
+        ListNode ln2 = start.next;
+        ListNode temp = null;
+
+        int count = 1;
+        while (count < k) {
+            temp = ln2.next;
+            ln2.next = ln1;
+            ln1 = ln2;
+            ln2 = temp;
+        }
+        start.next = ln2;
+        return ln1;
+    }
+
+    public class ListNode {
+      int val;
+      ListNode next;
+      ListNode(int x) {
+          val = x;
+      }
+    }
+
+
+
+
+
 }
