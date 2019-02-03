@@ -193,8 +193,8 @@ public class LCManagerServiceImpl implements LCManagerService {
         return retChar;
     }
 
-    @Override
-    public ClientResponse removeDuplicates(int[] nums) throws LCException {
+
+    public ClientResponse removeDuplicates(int[] nums) throws LCException{
         List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
         Map<String, Object> responseData = new HashMap();
         responseData.put("input", nums);
