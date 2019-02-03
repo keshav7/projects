@@ -26,4 +26,8 @@ include 'sched:sched-server:sched-core'
 findProject(':sched:sched-server:sched-core')?.name = 'sched-core'
 include 'sched:sched-server:sched-wrapper'
 findProject(':sched:sched-server:sched-wrapper')?.name = 'sched-wrapper'
+include ':parkingLot'
+include ':parkingLot:pl-server'
+include ':parkingLot:pl-server:pl-core'
+include ':parkingLot:pl-server:pl-wrapper'
 

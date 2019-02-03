@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Input {
 
     String input;
+    Integer intInput;
     int[] inputIntList;
     Integer target;
 }
