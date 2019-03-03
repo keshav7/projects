@@ -2,9 +2,11 @@ package com.projects.lc.server.wrapper.service;
 
 import com.projects.core.datatypes.dto.ClientResponse;
 import com.projects.core.utils.SuccessCodes;
+import com.projects.lc.server.wrapper.dto.HotelBookingTime;
 import com.projects.lc.server.wrapper.dto.Matrix;
 import com.projects.lc.server.wrapper.service.exception.LCException;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.SourceType;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -261,6 +263,8 @@ public class LCManagerServiceImpl implements LCManagerService {
     }
 
 
+
+
     private void swap(int[] arr, int firstIndex, int secondIndex) {
         int temp = arr[firstIndex];
         arr[firstIndex] = arr[secondIndex];
@@ -376,6 +380,212 @@ public class LCManagerServiceImpl implements LCManagerService {
 
 
 
+    @Override
+    public ClientResponse nDigitSSum(int[] input) throws LCException {
+        List<String> resultList = new ArrayList<>();
+        List<List<Integer>> memo = new ArrayList<>();
+
+        nsPermutes(0, input[0], input[1], 0, "", resultList);
 
 
+        Map<String, Object> responseData = new HashMap();
+        responseData.put("output", resultList);
+        responseData.put("count", resultList.size());
+        return new ClientResponse(SuccessCodes.OK, HttpStatus.OK, responseData);
+    }
+
+    private void nsPermutes(int index, int n, int s, int prevSum, String result, List<String> resultList) {
+        System.out.println(index);
+        if (index >= n) {
+            return;
+        }
+        if (index == (n - 1)) {
+            if ((s - prevSum) <= 9) {
+                resultList.add(result + String.valueOf(s - prevSum));
+                System.out.println(result + String.valueOf(s - prevSum));
+                return;
+            }
+        }
+        int start = 0;
+        if (index == 0) {
+            start = 1;
+        }
+        for (int i = start; i <= 9; i++) {
+            if ((prevSum + i) <= s) {
+                nsPermutes(index + 1, n , s, prevSum + i, result + String.valueOf(i), resultList);
+            }
+        }
+    }
+
+    @Override
+    public ClientResponse N3ColorBoard(int[] input) throws LCException {
+
+        HashMap<String, Integer> memo = new HashMap<>();
+        int ways = colorBoard(0, 0, 3, input[0], memo, -1);
+
+
+        Map<String, Object> responseData = new HashMap();
+        responseData.put("output", ways);
+        return new ClientResponse(SuccessCodes.OK, HttpStatus.OK, responseData);
+
+    }
+
+    private int colorBoard(int i, int j, int rows, int columns, HashMap<String, Integer> memo, int prevColor) {
+
+        if (i >= rows || j>= columns) {
+            return 0;
+        }
+        int ways = 1;
+
+        for (int k = 0; k < 4; k++) {
+            if (k != prevColor) {
+                if (memo.containsKey("i" + "j" + "k")) {
+                    return memo.get("i" + "j" + "k");
+                }
+                ways = ways + colorBoard(i + 1, j, rows, columns, memo, k);
+                ways = ways + colorBoard(i, j + 1, rows, columns, memo, k);
+            }
+        }
+        return ways;
+    }
+
+    @Override
+    public ClientResponse CoinsInLine(List<Integer> input) throws LCException {
+        Map<String, Object> responseData = new HashMap();
+        responseData.put("output", inLineCoinsMaxValue(input, 0, 0, 0));
+        return new ClientResponse(SuccessCodes.OK, HttpStatus.OK, responseData);
+    }
+
+    private int inLineCoinsMaxValue(List<Integer> input, int index, int prevSum, int count) throws LCException {
+        if (index >= input.size()) {
+            return -1;
+        }
+        int l1 = inLineCoinsMaxValue(input, index + 1, prevSum, count);
+        int l2 = -1;
+        if (count + 1 == input.size()/2) {
+            l2 = prevSum + input.get(index);
+        } else if (count + index < input.size()/2) {
+            l2 = inLineCoinsMaxValue(input, index + 1, prevSum + input.get(index), count++);
+        }
+        return Math.max(l1, l2);
+    }
+
+    @Override
+    public ClientResponse RepeatsAndMissingNumber(List<Integer> input) throws LCException {
+
+        int repeat = -1;
+        int missing = -1;
+        for (Integer num : input) {
+            if (input.get(num - 1) < 0) {
+                repeat = num;
+            }
+            input.set(num - 1, input.get(num - 1) * -1);
+        }
+
+        for (int i = 0; i < input.size(); i++) {
+            if (i + 1 != repeat && input.get(i) > 0) {
+                missing = i + 1;
+            }
+        }
+        System.out.println(input);
+
+        Map<String, Object> responseData = new HashMap();
+        responseData.put("repeat", repeat);
+        responseData.put("missing", missing);
+        return new ClientResponse(SuccessCodes.OK, HttpStatus.OK, responseData);
+    }
+
+    @Override
+    public ClientResponse flipInSequence(List<Integer> input) throws LCException {
+        int fStart = -1;
+        int fEnd = -1;
+        int fCount = 0;
+        int start = 0;
+        int end = 0;
+        int count = 0;
+
+
+        for (int i = 0; i < input.size(); i++) {
+            if (input.get(i) == 0) {
+                count++;
+            }
+            else {
+                count--;
+            }
+            if (count > 0 && count > fCount) {
+                fStart = start;
+                fEnd = i;
+                fCount = count;
+            }
+            else {
+                count = 0;
+                start = i + 1;
+            }
+        }
+        Map<String, Object> responseData = new HashMap();
+        responseData.put("start", fStart);
+        responseData.put("end", fEnd);
+        responseData.put("count", fCount);
+        return new ClientResponse(SuccessCodes.OK, HttpStatus.OK, responseData);
+    }
+
+
+    @Override
+    public ClientResponse hotelBookingTime(List<Integer> arrival, List<Integer> departure, int k) throws LCException {
+        int activeBookingsCount = 0;
+        Boolean possible = true;
+        List<HotelBookingTime> hotelBookingTimes = new ArrayList<>();
+        for (Integer arr : arrival) {
+            hotelBookingTimes.add(HotelBookingTime.builder().arrival(true).time(arr).build());
+        }
+        for (Integer dep : departure) {
+            hotelBookingTimes.add(HotelBookingTime.builder().arrival(false).time(dep).build());
+        }
+        Collections.sort(hotelBookingTimes, new Comparator<HotelBookingTime>(){
+            public int compare(HotelBookingTime o1, HotelBookingTime o2){
+                return o1.getTime() - o2.getTime();
+            }
+        });
+        for (HotelBookingTime hotelBookingTime : hotelBookingTimes) {
+
+            if (!hotelBookingTime.getArrival()) {
+                activeBookingsCount--;
+            }
+            else {
+                activeBookingsCount++;
+            }
+
+            if (activeBookingsCount > k) {
+                possible = false;
+            }
+        }
+        System.out.println(hotelBookingTimes);
+        Map<String, Object> responseData = new HashMap();
+        responseData.put("possible", possible);
+        return new ClientResponse(SuccessCodes.OK, HttpStatus.OK, responseData);
+    }
+
+    @Override
+    public ClientResponse firstMissigPositiveInteger(List<Integer> input) throws LCException {
+
+        int missing = -1;
+        for (int i = 0; i< input.size(); i++) {
+            if (input.get(i) >=0 && input.get(i) < input.size()) {
+                int temp = input.get(i);
+                input.set(i, input.get(input.get(i) - 1));
+                input.set(input.get(i) - 1, temp);
+            }
+        }
+
+        for (int j = 0; j < input.size(); j++) {
+            if (input.get(j) != j + 1) {
+                missing = j + 1;
+                break;
+            }
+        }
+
+        Map<String, Object> responseData = new HashMap();
+        responseData.put("possible", missing);
+        return new ClientResponse(SuccessCodes.OK, HttpStatus.OK, responseData);
+    }
 }

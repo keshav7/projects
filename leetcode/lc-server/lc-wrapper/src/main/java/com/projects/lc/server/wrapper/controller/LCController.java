@@ -144,5 +144,156 @@ public class LCController {
     }
 
 
+    @RequestMapping(value = "n_digit_s_sum", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Metered(name = "N digit numbers with digit sum S, Find out the number of N digit numbers, whose digits on being " +
+            "added equals to a given number S. Note that a valid number starts from digits 1-9 except the number 0 itself." +
+            " i.e. leading zeroes are not allowed.", absolute = true)
+    @LogExecutionTime
+    public @ResponseBody
+    ResponseEntity nDigitSSum(
+            @RequestBody @ApiParam(value = "n_digit_s_sum", required = true)
+            @Valid Input request) {
+        ClientResponse clientResponse = null;
+        try {
+            clientResponse = lcManagerService.nDigitSSum(request.getInputIntList());
+        } catch (LCException e) {
+            log.error("Exception in finding N digits with S sum", e);
+            clientResponse = ResourceUtils.setClientErrorResponse(e);
+        }
+        return new ResponseEntity<>(clientResponse, clientResponse.getHttpStatus());
+    }
+
+    @RequestMapping(value = "n_3_color_board", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Metered(name = "Given a 3Xn board, find the number of ways to color it using at most 4 colors such that no two " +
+            "adjacent boxes have same color. Diagonal neighbors are not treated as adjacent boxes. ", absolute = true)
+    @LogExecutionTime
+    public @ResponseBody
+    ResponseEntity N3ColorBoard(
+            @RequestBody @ApiParam(value = "n_3_color_board", required = true)
+            @Valid Input request) {
+        ClientResponse clientResponse = null;
+        try {
+            clientResponse = lcManagerService.N3ColorBoard(request.getInputIntList());
+        } catch (LCException e) {
+            log.error("Exception in finding N digits with S sum", e);
+            clientResponse = ResourceUtils.setClientErrorResponse(e);
+        }
+        return new ResponseEntity<>(clientResponse, clientResponse.getHttpStatus());
+    }
+
+    @RequestMapping(value = "coins_in_line", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Metered(name = "Given a 3Xn board, find the number of ways to color it using at most 4 colors such that no two " +
+            "adjacent boxes have same color. Diagonal neighbors are not treated as adjacent boxes. ", absolute = true)
+    @LogExecutionTime
+    public @ResponseBody
+    ResponseEntity CoinsInLine(
+            @RequestBody @ApiParam(value = "coins_in_line", required = true)
+            @Valid Input request) {
+        ClientResponse clientResponse = null;
+        try {
+            clientResponse = lcManagerService.CoinsInLine(request.getIntegerList());
+        } catch (LCException e) {
+            log.error("Exception in finding max in n coins in line", e);
+            clientResponse = ResourceUtils.setClientErrorResponse(e);
+        }
+        return new ResponseEntity<>(clientResponse, clientResponse.getHttpStatus());
+    }
+
+    @RequestMapping(value = "repeat_and_missing", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Metered(name = "You are given a read only array of n integers from 1 to n." +
+            "Each integer appears exactly once except A which appears twice and B which is missing." +
+            "Return A and B." +
+            "Note: Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?" +
+            "Note that in your output A should precede B.", absolute = true)
+    @LogExecutionTime
+    public @ResponseBody
+    ResponseEntity RepeatsAndMissingNumber(
+            @RequestBody @ApiParam(value = "coins_in_line", required = true)
+            @Valid Input request) {
+        ClientResponse clientResponse = null;
+        try {
+            clientResponse = lcManagerService.RepeatsAndMissingNumber(request.getIntegerList());
+        } catch (LCException e) {
+            log.error("Exception in finding max in n coins in line", e);
+            clientResponse = ResourceUtils.setClientErrorResponse(e);
+        }
+        return new ResponseEntity<>(clientResponse, clientResponse.getHttpStatus());
+    }
+
+    @RequestMapping(value = "flip_in_seq", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Metered(name = "You are given a binary string(i.e. with characters 0 and 1) S consisting of characters " +
+            "S1, S2, …, SN. In a single operation, you can choose two indices L and R such that 1 ≤ L ≤ R ≤ N and " +
+            "flip the characters SL, SL+1, …, SR. By flipping, we mean change character 0 to 1 and vice-versa.\n" +
+            "Your aim is to perform ATMOST one operation such that in final string number of 1s is maximised. " +
+            "If you don’t want to perform the operation, return an empty array. Else, return an array consisting of" +
+            " two elements denoting L and R. If there are multiple solutions, return the lexicographically smallest pair" +
+            " of L and R.", absolute = true)
+    @LogExecutionTime
+    public @ResponseBody
+    ResponseEntity flipInSeq(
+            @RequestBody @ApiParam(value = "flip_in_seq", required = true)
+            @Valid Input request) {
+        ClientResponse clientResponse = null;
+        try {
+            clientResponse = lcManagerService.flipInSequence(request.getIntegerList());
+        } catch (LCException e) {
+            log.error("Exception in finding max in n coins in line", e);
+            clientResponse = ResourceUtils.setClientErrorResponse(e);
+        }
+        return new ResponseEntity<>(clientResponse, clientResponse.getHttpStatus());
+    }
+
+    @RequestMapping(value = "hotel_booking_time", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Metered(name = "A hotel manager has to process N advance bookings of rooms for the next season. " +
+            "His hotel has K rooms. Bookings contain an arrival date and a departure date. He wants to find out whether " +
+            "there are enough rooms in the hotel to satisfy the demand. Write a program that solves this problem in " +
+            "time O(N log N) .", absolute = true)
+    @LogExecutionTime
+    public @ResponseBody
+    ResponseEntity hotelBookingTimes(
+            @RequestBody @ApiParam(value = "hotel_booking_time", required = true)
+            @Valid Input request) {
+        ClientResponse clientResponse = null;
+        try {
+            clientResponse = lcManagerService.hotelBookingTime(request.getIntegerList(), request.getSecondIntegerList(),
+                    request.getTarget());
+        } catch (LCException e) {
+            log.error("Exception in finding max in n coins in line", e);
+            clientResponse = ResourceUtils.setClientErrorResponse(e);
+        }
+        return new ResponseEntity<>(clientResponse, clientResponse.getHttpStatus());
+    }
+
+    @RequestMapping(value = "first_missing_positive_int", method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Metered(name = "Given an unsorted integer array, find the first missing positive integer. " +
+            "Your algorithm should run in O(n) time and use constant space.", absolute = true)
+    @LogExecutionTime
+    public @ResponseBody
+    ResponseEntity firstMissingPositiveInteger(
+            @RequestBody @ApiParam(value = "first_missing_positive_int", required = true)
+            @Valid Input request) {
+        ClientResponse clientResponse = null;
+        try {
+            clientResponse = lcManagerService.firstMissigPositiveInteger(request.getIntegerList());
+        } catch (LCException e) {
+            log.error("Exception in finding max in n coins in line", e);
+            clientResponse = ResourceUtils.setClientErrorResponse(e);
+        }
+        return new ResponseEntity<>(clientResponse, clientResponse.getHttpStatus());
+    }
 
 }

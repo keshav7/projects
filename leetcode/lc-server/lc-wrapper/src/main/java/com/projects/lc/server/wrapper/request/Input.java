@@ -7,6 +7,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -16,4 +17,6 @@ public class Input {
     String input;
     int[] inputIntList;
     Integer target;
+    List<Integer> integerList;
+    List<Integer> secondIntegerList;
 }
