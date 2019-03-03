@@ -2,9 +2,6 @@ package com.projects.lc.server.wrapper.service;
 
 import com.projects.core.datatypes.dto.ClientResponse;
 import com.projects.lc.server.wrapper.service.exception.LCException;
-import org.w3c.dom.ls.LSException;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public interface LCManagerService {

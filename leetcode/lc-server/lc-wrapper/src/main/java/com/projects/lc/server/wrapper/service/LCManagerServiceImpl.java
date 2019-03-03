@@ -2,15 +2,17 @@ package com.projects.lc.server.wrapper.service;
 
 import com.projects.core.datatypes.dto.ClientResponse;
 import com.projects.core.utils.SuccessCodes;
+<<<<<<< HEAD
 import com.projects.lc.server.wrapper.dto.HotelBookingTime;
 import com.projects.lc.server.wrapper.dto.Matrix;
+=======
+>>>>>>> 86a6f5df5f5fff8a75ac390504bca6b77433b66b
 import com.projects.lc.server.wrapper.service.exception.LCException;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.SourceType;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -197,7 +199,7 @@ public class LCManagerServiceImpl implements LCManagerService {
         return retChar;
     }
 
-    @Override
+
     public ClientResponse removeDuplicates(int[] nums) throws LCException{
         List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
         Map<String, Object> responseData = new HashMap();

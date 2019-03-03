@@ -15,6 +15,7 @@ import java.util.List;
 public class Input {
 
     String input;
+    Integer intInput;
     int[] inputIntList;
     Integer target;
     List<Integer> integerList;
